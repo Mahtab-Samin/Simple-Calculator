@@ -5,6 +5,7 @@ using namespace std;
 
 float num1, num2;
 
+// to take inputs
 void input(){
     cout<<endl;
     cout<<"Enter number 1: ";
@@ -14,12 +15,14 @@ void input(){
     cout<<endl;
 }
 
+// for addition operations
 float addition(){
     float sum=num1+num2;
     cout<<"Total is: "<<sum<<endl<<endl;
     return sum;
 }
 
+// for subtraction operations
 float subtraction(){
     if(num1<num2){
         cout<<"Invalid\n"<<endl;
@@ -32,12 +35,14 @@ float subtraction(){
     }
 }
 
+// for multiplication operations
 float multiplication(){
     float product=num1*num2;
     cout<<"Product is: "<<product<<endl<<endl;
     return product;
 }
 
+// for divisional operations
 float division(){
     if(num2==0){
         cout<<"Invalid\n";
