@@ -1,59 +1,9 @@
 #include<iostream>
-#include<conio.h>
+#include<sstream>
 #include<cmath>
 using namespace std;
 
-float num1, num2, a, b, c;
-
-// to take inputs
-void input(){
-    cout<<endl;
-    cout<<"Enter number 1: ";
-    cin>>num1;
-    cout<<"Enter number 2: ";
-    cin>>num2;
-    cout<<endl;
-}
-
-// for addition operations
-float addition(){
-    float sum=num1+num2;
-    cout<<"Total is: "<<sum<<endl<<endl;
-    return sum;
-}
-
-// for subtraction operations
-float subtraction(){
-    if(num1<num2){
-        cout<<"Invalid\n"<<endl;
-        return 0;
-    }
-    else{
-    float net=num1-num2;
-    cout<<"Net is: "<<net<<endl<<endl;
-    return net;
-    }
-}
-
-// for multiplication operations
-float multiplication(){
-    float product=num1*num2;
-    cout<<"Product is: "<<product<<endl<<endl;
-    return product;
-}
-
-// for divisional operations
-float division(){
-    if(num2==0){
-        cout<<"Invalid\n";
-        return 0;
-    }
-    else{
-        float quotient = num1 / num2;
-        cout<<"Quotient is: "<<quotient<<endl<<endl;
-        return quotient;
-    }
-}
+float a, b, c;
 
 // for quadratic functions
 float quadratic(){
@@ -89,42 +39,48 @@ float quadratic(){
 }
 
 int main(){
-int option;
+    string input;
+    cout << "Simple Calculator\n";
+    cout << "Special commands: \nq = quadratic solve\nx = exit\n";
 
-cout<<"Welcome!\n"<<endl<<"Please select any one operation\n";
-O:
-cout<<"1. Addition\n"<<"2. Subtraction\n"<<"3. Multiplication\n"<<"4. Division\n"<<"5. Quadratic Equation Solver\n"<<"6. Exit\n"<<endl<<"Option: ";
-cin>>option;
-if(option<=0 || option>6){
-    cout<<"Please select within options\n"<<endl;
-    goto O;
-}
-else if(option==6){
-    return 0;
-}
-else{
-    I:
-    if(option>0 && option<5){
-    input();
-    if(option==1){
-        addition();
-        goto O;
+    while(true){
+        cout << "\nEnter: ";
+        cin >> input;
+        getline(cin, input);
+
+        if(input == "x"){
+            cout << "Exiting calculator..." <<endl;
+            break;
+        }
+        else if(input == "q"){
+            quadratic();
+            continue;
+        }
+
+        // for parsing
+        stringstream ss(input);
+        float num1, num2;
+        char op;
+        ss >> num1 >> op >> num2;
+
+        switch(op){
+            case '+':
+                cout << "Result = " << num1 + num2 <<endl;
+                break;
+            case '-':
+                cout << "Result = " << num1 - num2 <<endl;
+                break;
+            case '*':
+                cout << "Result = " << num1 * num2 <<endl;
+                break;
+            case '/':
+                if(num2 == 0) cout << "Error: Division by zero\n";
+                else cout << "Result = " << num1 / num2 <<endl;
+                break;
+            default:
+                cout << "Invalid input. Use +, -, *, / or special commands.\n";
+        }
+
+        cout<<"For special commands: q = quadratic solve, x = exit";
     }
-    else if(option==2){
-        subtraction();
-        goto O;
-    }
-    else if(option==3){
-        multiplication();
-        goto O;
-    }
-    else{
-        division();
-        goto O;
-    }}
-    else{
-        quadratic();
-        goto O;
-    }
-}
 }
